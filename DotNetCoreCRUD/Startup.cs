@@ -1,7 +1,9 @@
+using DotNetCoreCRUD.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,11 @@ namespace DotNetCoreCRUD
         {
 
             services.AddControllers();
+            // using Microsoft.EntityFrameworkCore;
+            // 註冊DB連線服務
+            services.AddDbContext<ContosoUniversityContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DotNetCoreCRUD", Version = "v1" });
