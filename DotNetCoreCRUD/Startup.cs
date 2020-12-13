@@ -32,6 +32,7 @@ namespace DotNetCoreCRUD
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
             services.AddControllers();
             // using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,8 @@ namespace DotNetCoreCRUD
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            
+            
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
